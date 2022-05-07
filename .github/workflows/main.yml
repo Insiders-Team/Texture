@@ -15,15 +15,15 @@ jobs:
           files: assets/ pack.mcmeta pack.png
           recursive: true
           dest: texture/Texture.zip
-          
-      - name: switching from HTTPS to SSH
-        run: git remote set-url origin ${{ secrets.ssh }}
-        
+      
+      - name: Test check for changes
+        run: ls -la
+      
       - name: check for changes
         run: git status
         
       - name: stage changed files
-        run: git add texture/Texture.zip
+        run: git add ./texture/Texture.zip
         
       - name: commit changed files
         run: git commit -m "Update Texture.zip"
