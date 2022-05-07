@@ -15,22 +15,21 @@ jobs:
           files: assets/ pack.mcmeta pack.png
           recursive: true
           dest: texture/Texture.zip
-      
-      - name: Test check for changes
-        run: ls -la
-      
-      - name: check for changes
-        run: git status
+    
+      - name: Setting up the Github Actions git user
+        run: | 
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         
-      - name: stage changed files
+      - name: Add the zipped folder
         run: git add ./texture/Texture.zip
         
-      - name: commit changed files
+      - name: Commit the zip
         run: git commit -m "Update Texture.zip"
         
-      - name: fetch from master
-        run: git fetch origin master
+      - name: Fetch the repository
+        run: git fetch origin main
         
-      - name: push code to master
+      - name: Push the repository
         run: git push origin HEAD:master
         
