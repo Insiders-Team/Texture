@@ -31,5 +31,5 @@ jobs:
         run: git fetch origin main
         
       - name: Push the repository
-        run: git push origin HEAD:master
+        run: git push origin main
         
