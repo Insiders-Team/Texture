@@ -18,7 +18,7 @@ jobs:
         uses: montudor/action-zip@v1
 
       - name: "Zip the texture"
-        run: zip -r -9 -Z bzip2 –m ./textures/zipped/Texture.zip ./textures/unzipped
+        run: zip -r -9 -Z bzip2  –m . -i ./textures/zipped/Texture.zip ./textures/unzipped
 
       # - name: "Zip the texture"
       #   uses: papeloto/action-zip@v1
