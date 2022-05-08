@@ -1,0 +1,37 @@
+name: Zip and Upload
+
+on:
+  push:
+    branches: ["main"]
+
+permissions: write-all
+
+jobs:
+  zip-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: papeloto/action-zip@v1
+        with:
+          files: assets/ pack.mcmeta pack.png
+          recursive: true
+          dest: texture/Texture.zip
+    
+      - name: Setting up the Github Actions git user
+        run: | 
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+        
+      - name: Add the zipped folder
+        run: git add ./texture/Texture.zip
+        
+      - name: Commit the zip
+        run: git commit -m "Update Texture.zip"
+        
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+        
