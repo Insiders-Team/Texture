@@ -18,8 +18,8 @@ jobs:
     
       - name: Setting up the Github Actions git user
         run: | 
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
         
       - name: Add the zipped folder
         run: git add ./texture/Texture.zip
@@ -30,6 +30,6 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ github.token }}
           branch: ${{ github.ref }}
         
