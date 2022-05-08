@@ -1,0 +1,64 @@
+## Action Name
+name: "🔃 CD - Java Auto-update"
+
+## Trigger
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "texture/unzipped/java/**"
+    branches: ["main"]
+
+## Action Permissions
+permissions: write-all
+
+## Jobs
+jobs:
+  ## Java Edition Texture
+  deploy-java:
+    ## Name of the job
+    name: "🔃 CD - Deploy Java Texture"
+
+    ## Environment variables
+    env:
+      FILE_NAME: "Java-Insiders.zip"
+
+    ## Run on Ubuntu
+    runs-on: ubuntu-latest
+
+    ## Jobs Steps
+    steps:
+      ## Checkout repository
+      - name: "🔃 CD - Checkout the repository"
+        uses: actions/checkout@v3
+
+      ## Zip the texture
+      - name: "🔃 CD - Zip the texture"
+        uses: papeloto/action-zip@v1
+        with:
+          files: texture/unzipped/java
+          recursive: true
+          dest: texture/zipped/${{ env.FILE_NAME }}
+
+      ## Setup the git for pushing the changes
+      - name: "🔃 CD - Setup git credentials"
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      ## Add the zipped texture
+      - name: "🔃 CD - Add the zipped texture"
+        run: |
+          git add texture/zipped/${{ env.FILE_NAME }}
+
+      ## Commit the changes
+      - name: "🔃 CD - Commit the changes"
+        run: |
+          git commit -m "Java: Update ${{ env.FILE_NAME }}"
+
+      ## Push the current changes for the repository
+      - name: "🔃 CD - Push the changes to the repository"
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
