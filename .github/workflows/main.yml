@@ -44,7 +44,7 @@ jobs:
 
       - name: "🔃 CD - Zip the texture"
         run: |
-          zip -u -F -ll -Z bzip2 -r texture/zipped/$JAVA_FILE_NAME texture/unzipped/java
+          zip -u -ll -Z bzip2 -r texture/zipped/$JAVA_FILE_NAME texture/unzipped/java
 
       ## Setup the git for pushing the changes
       - name: "🔃 CD - Setup git credentials"
