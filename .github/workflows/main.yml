@@ -14,10 +14,11 @@ jobs:
       - name: "Checkout the repository"
         uses: actions/checkout@v3
 
-      - name: "Zip the texture"
+      - name: "Install zip"
         uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r ./texture/zipped/Texture.zip ./texture/unzipped/
+
+      - name: "Zip the texture"
+        run: zip –u textures/zipped/Texture.zip textures/unzipped/**
 
       # - name: "Zip the texture"
       #   uses: papeloto/action-zip@v1
