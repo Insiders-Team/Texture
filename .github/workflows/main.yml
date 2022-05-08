@@ -15,6 +15,11 @@ env:
   JAVA_FILE_NAME: "Java-Insiders.zip"
   BEDROCK_FILE_NAME: "Bedrock-Insiders.mcpack"
 
+## One job at time
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 ## Action Permissions
 permissions: write-all
 
@@ -51,12 +56,6 @@ jobs:
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-
-      ## Pre-pull to avoid errors when pushing
-      - name: "🔃 CD - Pre-commands changes"
-        run: |
-          git fetch origin main
-          git pull origin main
 
       ## Add the zipped texture
       - name: "🔃 CD - Add the zipped texture"
@@ -106,12 +105,6 @@ jobs:
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-
-      ## Pre-pull to avoid errors when pushing
-      - name: "🔃 CI - Pre-commands changes"
-        run: |
-          git fetch origin main
-          git pull origin main
 
       ## Add the zipped texture
       - name: "🔃 CI - Add the zipped texture"
