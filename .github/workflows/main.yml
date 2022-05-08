@@ -25,6 +25,10 @@ jobs:
     ## Name of the job
     name: "🔃 CD - Deploy Java Texture"
 
+    ## Environment variables
+    env:
+      FILE_NAME: "Java-Insiders.zip"
+
     ## Run on Ubuntu
     runs-on: ubuntu-latest
 
@@ -35,16 +39,12 @@ jobs:
         uses: actions/checkout@v3
 
       ## Zip the texture
-      # - name: "🔃 CD - Zip the texture"
-      #   uses: papeloto/action-zip@v1
-      #   with:
-      #     files: texture/unzipped/java
-      #     recursive: true
-      #     dest: texture/zipped/$JAVA_FILE_NAME
-
       - name: "🔃 CD - Zip the texture"
-        run: |
-          zip -u -Z bzip2 -r texture/zipped/$JAVA_FILE_NAME . -i texture/unzipped/java/*
+        uses: papeloto/action-zip@v1
+        with:
+          files: texture/unzipped/java
+          recursive: true
+          dest: texture/zipped/${{ env.FILE_NAME }}
 
       ## Setup the git for pushing the changes
       - name: "🔃 CD - Setup git credentials"
@@ -61,12 +61,12 @@ jobs:
       ## Add the zipped texture
       - name: "🔃 CD - Add the zipped texture"
         run: |
-          git add texture/zipped/$JAVA_FILE_NAME
+          git add texture/zipped/${{ env.FILE_NAME }}
 
       ## Commit the changes
       - name: "🔃 CD - Commit the changes"
         run: |
-          git commit -m "Java: Update $JAVA_FILE_NAME"
+          git commit -m "Java: Update ${{ env.FILE_NAME }}"
 
       ## Push the current changes for the repository
       - name: "🔃 CD - Push the changes to the repository"
@@ -80,6 +80,10 @@ jobs:
     ## Name of the job
     name: "🔃 CI - Deploy Bedrock Texture"
 
+    ## Environment variables
+    env:
+      FILE_NAME: "Bedrock-Insiders.mcpack"
+
     ## Run on Ubuntu
     runs-on: ubuntu-latest
 
@@ -90,16 +94,12 @@ jobs:
         uses: actions/checkout@v3
 
       ## Zip the texture
-      # - name: "🔃 CD - Zip the texture"
-      #   uses: papeloto/action-zip@v1
-      #   with:
-      #     files: texture/unzipped/java
-      #     recursive: true
-      #     dest: texture/zipped/$BEDROCK_FILE_NAME
-
       - name: "🔃 CI - Zip the texture"
-        run: |
-          zip -u -Z bzip2 -r texture/zipped/$BEDROCK_FILE_NAME . -i texture/unzipped/bedrock/*
+        uses: papeloto/action-zip@v1
+        with:
+          files: texture/unzipped/bedrock
+          recursive: true
+          dest: texture/zipped/${{ env.FILE_NAME }}
 
       ## Setup the git for pushing the changes
       - name: "🔃 CI - Setup git credentials"
@@ -116,12 +116,12 @@ jobs:
       ## Add the zipped texture
       - name: "🔃 CI - Add the zipped texture"
         run: |
-          git add texture/zipped/$BEDROCK_FILE_NAME
+          git add texture/zipped/${{ env.FILE_NAME }}
 
       ## Commit the changes
       - name: "🔃 CI - Commit the changes"
         run: |
-          git commit -m "Bedrock: Update $BEDROCK_FILE_NAME"
+          git commit -m "Bedrock: Update ${{ env.FILE_NAME }}"
 
       ## Push the current changes for the repository
       - name: "🔃 CI - Push the changes to the repository"
