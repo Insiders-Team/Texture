@@ -35,12 +35,16 @@ jobs:
         uses: actions/checkout@v3
 
       ## Zip the texture
+      # - name: "🔃 CD - Zip the texture"
+      #   uses: papeloto/action-zip@v1
+      #   with:
+      #     files: texture/unzipped/java
+      #     recursive: true
+      #     dest: texture/zipped/$JAVA_FILE_NAME
+
       - name: "🔃 CD - Zip the texture"
-        uses: papeloto/action-zip@v1
-        with:
-          files: texture/unzipped/java
-          recursive: true
-          dest: texture/zipped/$JAVA_FILE_NAME
+        run: |
+          zip -u -F -ll -Z bzip2 -r texture/zipped/$JAVA_FILE_NAME texture/unzipped/java
 
       ## Setup the git for pushing the changes
       - name: "🔃 CD - Setup git credentials"
