@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "texture/unzipped/java"
-      - "texture/unzipped/bedrock"
+      - "texture/unzipped/java/*"
+      - "texture/unzipped/bedrock/*"
     branches: ["main"]
 
 ## Environment Variables
