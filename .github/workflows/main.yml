@@ -7,12 +7,12 @@ on:
 permissions: write-all
 
 jobs:
-  zip-files:
+  texture:
+    name: "Update texture zip"
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout the repository"
         uses: actions/checkout@v3
-      
 
       - name: "Zip the texture"
         uses: papeloto/action-zip@v1
