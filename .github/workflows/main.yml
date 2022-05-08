@@ -1,40 +1,111 @@
-name: "Zip and upload"
+## Action Name
+name: "🔃 CI/CD - Auto-update"
 
+## Trigger
 on:
+  workflow_dispatch:
   push:
+    paths:
+      - "texture/unzipped/java"
+      - "texture/unzipped/bedrock"
     branches: ["main"]
 
+## Environment Variables
+env:
+  JAVA_FILE_NAME: "Java-Insiders.zip"
+  BEDROCK_FILE_NAME: "Bedrock-Insiders.mcpack"
+
+## Action Permissions
 permissions: write-all
 
+## Jobs
 jobs:
-  texture:
-    name: "Update texture zip"
+  ## Java Edition Texture
+  deploy-java:
+    ## Name of the job
+    name: "🔃 CD - Deploy Java Texture"
+
+    ## Run on Ubuntu
     runs-on: ubuntu-latest
+
+    ## Jobs Steps
     steps:
-      - name: "Checkout the repository"
+      ## Checkout repository
+      - name: "🔃 CD - Checkout the repository"
         uses: actions/checkout@v3
 
-      - name: "Zip the texture"
+      ## Zip the texture
+      - name: "🔃 CD - Zip the texture"
         uses: papeloto/action-zip@v1
         with:
-          files: ./texture/unzipped
+          files: texture/unzipped/java
           recursive: true
-          dest: ./texture/zipped/Texture.zip
-    
-      - name: "Setting up git"
-        run: | 
+          dest: texture/zipped/$JAVA_FILE_NAME
+
+      ## Setup the git for pushing the changes
+      - name: "🔃 CD - Setup git credentials"
+        run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-        
-      - name: "Add the zipped texture"
-        run: git add texture/zipped/Texture.zip
-        
-      - name: "Commit the zipped texture"
-        run: git commit -m "Update Texture.zip"
-        
-      - name: "Push the changes"
+
+      ## Add the zipped texture
+      - name: "🔃 CD - Add the zipped texture"
+        run: |
+          git add texture/zipped/$JAVA_FILE_NAME
+
+      ## Commit the changes
+      - name: "🔃 CD - Commit the changes"
+        run: |
+          git commit -m "Java: Update $JAVA_FILE_NAME"
+
+      ## Push the current changes for the repository
+      - name: "🔃 CD - Push the changes to the repository"
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
-        
+
+  ## Bedrock Edition Texture
+  deploy-bedrock:
+    ## Name of the job
+    name: "🔃 CI - Deploy Bedrock Texture"
+
+    ## Run on Ubuntu
+    runs-on: ubuntu-latest
+
+    ## Jobs Steps
+    steps:
+      ## Checkout repository
+      - name: "🔃 CI - Checkout the repository"
+        uses: actions/checkout@v3
+
+      ## Zip the texture
+      - name: "🔃 CI - Zip the texture"
+        uses: papeloto/action-zip@v1
+        with:
+          files: texture/unzipped/bedrock
+          recursive: true
+          dest: texture/zipped/$BEDROCK_FILE_NAME
+
+      ## Setup the git for pushing the changes
+      - name: "🔃 CI - Setup git credentials"
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      ## Add the zipped texture
+      - name: "🔃 CI - Add the zipped texture"
+        run: |
+          git add texture/zipped/$BEDROCK_FILE_NAME
+
+      ## Commit the changes
+      - name: "🔃 CI - Commit the changes"
+        run: |
+          git commit -m "Bedrock: Update $BEDROCK_FILE_NAME"
+
+      ## Push the current changes for the repository
+      - name: "🔃 CI - Push the changes to the repository"
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
