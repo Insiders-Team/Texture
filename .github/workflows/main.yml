@@ -17,8 +17,9 @@ jobs:
       - name: "Zip the texture"
         uses: papeloto/action-zip@v1
         with:
-          files: texture/unzipped/**
-          dest: texture/zipped/Texture.zip
+          files: ./texture/unzipped
+          recursive: true
+          dest: ./texture/zipped/Texture.zip
     
       - name: "Setting up git"
         run: | 
