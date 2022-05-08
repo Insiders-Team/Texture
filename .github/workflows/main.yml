@@ -15,11 +15,6 @@ env:
   JAVA_FILE_NAME: "Java-Insiders.zip"
   BEDROCK_FILE_NAME: "Bedrock-Insiders.mcpack"
 
-## One job at time
-concurrency:
-  group: ${{ github.ref }}
-  cancel-in-progress: true
-
 ## Action Permissions
 permissions: write-all
 
@@ -33,6 +28,11 @@ jobs:
     ## Environment variables
     env:
       FILE_NAME: "Java-Insiders.zip"
+
+    ## One job at time
+    concurrency:
+      group: ${{ github.head_ref || github.run_id }}
+      cancel-in-progress: true
 
     ## Run on Ubuntu
     runs-on: ubuntu-latest
@@ -82,6 +82,11 @@ jobs:
     ## Environment variables
     env:
       FILE_NAME: "Bedrock-Insiders.mcpack"
+
+    ## One job at time
+    concurrency:
+      group: ${{ github.head_ref || github.run_id }}
+      cancel-in-progress: true
 
     ## Run on Ubuntu
     runs-on: ubuntu-latest
