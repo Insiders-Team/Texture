@@ -52,6 +52,11 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
+      ## Pre-pull to avoid errors when pushing
+      - name: "🔃 CD - Pull changes"
+        run: |
+          git pull origin main
+
       ## Add the zipped texture
       - name: "🔃 CD - Add the zipped texture"
         run: |
@@ -93,13 +98,18 @@ jobs:
 
       - name: "🔃 CD - Zip the texture"
         run: |
-          zip -u -ll -Z bzip2 -r ./texture/zipped/$BEDROCK_FILE_NAME ./texture/unzipped/bedrock
+          zip -u -ll -Z bzip2 texture/zipped/$BEDROCK_FILE_NAME texture/unzipped/bedrock/*
 
       ## Setup the git for pushing the changes
       - name: "🔃 CI - Setup git credentials"
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
+
+      ## Pre-pull to avoid errors when pushing
+      - name: "🔃 CI - Pull changes"
+        run: |
+          git pull origin main
 
       ## Add the zipped texture
       - name: "🔃 CI - Add the zipped texture"
