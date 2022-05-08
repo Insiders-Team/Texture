@@ -14,18 +14,12 @@ jobs:
       - name: "Checkout the repository"
         uses: actions/checkout@v3
 
-      - name: "Install zip"
-        uses: montudor/action-zip@v1
-
       - name: "Zip the texture"
-        run: zip -r ./textures/zipped/Texture.zip ./textures/unzipped
-
-      # - name: "Zip the texture"
-      #   uses: papeloto/action-zip@v1
-      #   with:
-      #     files: texture/unzipped/
-      #     recursive: true
-      #     dest: texture/zipped/Texture.zip
+        uses: papeloto/action-zip@v1
+        with:
+          files: ./texture/unzipped
+          recursive: true
+          dest: ./texture/zipped/Texture.zip
     
       - name: "Setting up git"
         run: | 
