@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Checkout the repository"
-	  uses: actions/checkout@v3
+        uses: actions/checkout@v3
       
 
-	- name: "Zip the texture"
+      - name: "Zip the texture"
         uses: papeloto/action-zip@v1
         with:
           files: texture/unzipped/**
