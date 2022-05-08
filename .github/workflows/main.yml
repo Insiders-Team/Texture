@@ -27,9 +27,9 @@ jobs:
       - name: Commit the zip
         run: git commit -m "Update Texture.zip"
         
-      - name: Fetch the repository
-        run: git fetch origin main
-        
-      - name: Push the repository
-        run: git push origin main
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
         
