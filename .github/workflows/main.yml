@@ -18,6 +18,7 @@ jobs:
         uses: papeloto/action-zip@v1
         with:
           files: texture/unzipped/assets/ texture/unzipped/pack.png texture/unzipped/pack.mcmeta
+          recursive: false
           dest: texture/zipped/Texture.zip
     
       - name: "Setting up git"
