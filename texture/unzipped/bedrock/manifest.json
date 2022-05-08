@@ -1,8 +1,8 @@
 {
   "format_version": 2,
   "header": {
-    "description": "Texture pack",
-    "name": "Insiders Pack",
+    "description": "§r§7Server texture pack",
+    "name": "§r§6§lInsiders Pack",
     "uuid": "b9f8d849-ab33-4e6c-80a8-5341b4a78331",
     "version": [
       1,
@@ -22,7 +22,7 @@
   },
   "modules": [
     {
-      "description": "Insiders Pack",
+      "description": "§r§6§lInsiders Pack",
       "type": "resources",
       "uuid": "aa6ec279-caa6-4a81-b3d3-1f62e11ab228",
       "version": [
