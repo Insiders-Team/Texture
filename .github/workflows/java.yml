@@ -19,6 +19,9 @@ jobs:
     ## Name of the job
     name: "🔃 CD - Deploy Java Texture"
 
+    ## "[ci-skip] prefix"
+    if: "!contains(github.event.commits[0].message, '[ci-skip]')"
+    
     ## Environment variables
     env:
       FILE_NAME: "Java-Insiders.zip"
