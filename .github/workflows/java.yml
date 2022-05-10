@@ -1,5 +1,5 @@
 ## Action Name
-name: "🔃 CD - Java Auto-update"
+name: "🔃 CI - Java Auto-update"
 
 ## Trigger
 on:
@@ -17,7 +17,7 @@ jobs:
   ## Java Edition Texture
   deploy-java:
     ## Name of the job
-    name: "🔃 CD - Deploy Java Texture"
+    name: "🔃 CI - Deploy Java Texture"
 
     ## "[ci-skip] prefix"
     if: "!contains(github.event.commits[0].message, '[ci-skip]')"
@@ -32,11 +32,11 @@ jobs:
     ## Jobs Steps
     steps:
       ## Checkout repository
-      - name: "🔃 CD - Checkout the repository"
+      - name: "🔃 CI - Checkout the repository"
         uses: actions/checkout@v3
 
       ## Zip the texture
-      - name: "🔃 CD - Zip the texture"
+      - name: "🔃 CI - Zip the texture"
         uses: papeloto/action-zip@v1
         with:
           files: texture/unzipped/java
@@ -44,23 +44,23 @@ jobs:
           dest: texture/zipped/${{ env.FILE_NAME }}
 
       ## Setup the git for pushing the changes
-      - name: "🔃 CD - Setup git credentials"
+      - name: "🔃 CI - Setup git credentials"
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
       ## Add the zipped texture
-      - name: "🔃 CD - Add the zipped texture"
+      - name: "🔃 CI - Add the zipped texture"
         run: |
           git add texture/zipped/${{ env.FILE_NAME }}
 
       ## Commit the changes
-      - name: "🔃 CD - Commit the changes"
+      - name: "🔃 CI - Commit the changes"
         run: |
           git commit -m "Java: Update ${{ env.FILE_NAME }}"
 
       ## Push the current changes for the repository
-      - name: "🔃 CD - Push the changes to the repository"
+      - name: "🔃 CI - Push the changes to the repository"
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
