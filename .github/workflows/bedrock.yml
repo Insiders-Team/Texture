@@ -18,7 +18,10 @@ jobs:
   deploy-bedrock:
     ## Name of the job
     name: "🔃 CI - Deploy Bedrock Texture"
-
+    
+    ## "[ci-skip] prefix"
+    if: "!contains(github.event.commits[0].message, '[ci-skip]')"
+    
     ## Environment variables
     env:
       FILE_NAME: "Bedrock-Insiders.mcpack"
