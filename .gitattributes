@@ -1,0 +1,9 @@
+## Set default behaviour to automatically normalize line endings.
+* text=auto eol=lf
+
+## Add to Git LFS, all PNG Files
+*.png filter=lfs diff=lfs merge=lfs -text
+
+## Add to Git LFS, all ZIP and MCPack Files
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.mcpack filter=lfs diff=lfs merge=lfs -text
