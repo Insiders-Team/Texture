@@ -46,16 +46,18 @@ jobs:
       ## Setup the git for pushing the changes
       - name: "🔃 CI - Setup git credentials"
         run: |
-          "git config --local user.email '41898282+github-actions[bot]@users.noreply.github.com'"
-          "git config --local user.name 'github-actions[bot]'"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
 
       ## Add the zipped texture
       - name: "🔃 CI - Add the zipped texture"
-        run: "git add texture/zipped/${{ env.FILE_NAME }}"
+        run: |
+          git add texture/zipped/${{ env.FILE_NAME }}
 
       ## Commit the changes
       - name: "🔃 CI - Commit the changes"
-        run: "git commit -m 'Java: Update ${{ env.FILE_NAME }}'"
+        run: |
+          git commit -m "Java: Update ${{ env.FILE_NAME }}""
 
       ## Push the current changes for the repository
       - name: "🔃 CI - Push the changes to the repository"
