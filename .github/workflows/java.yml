@@ -55,7 +55,7 @@ jobs:
 
       ## Commit the changes
       - name: "🔃 CI - Commit the changes"
-        run: "git commit -m "Java: Update ${{ env.FILE_NAME }}"
+        run: "git commit -m 'Java: Update ${{ env.FILE_NAME }}'"
 
       ## Push the current changes for the repository
       - name: "🔃 CI - Push the changes to the repository"
