@@ -24,7 +24,7 @@ jobs:
     
     ## Environment variables
     env:
-      FILE_NAME: "[${{github.event.commits[0].message}}] - Java-Insiders.zip"
+      FILE_NAME: "v1.0.3_Java-Insiders.zip"
 
     ## Run on Ubuntu
     runs-on: ubuntu-latest
