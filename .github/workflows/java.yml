@@ -21,10 +21,10 @@ jobs:
 
     ## "[ci-skip] prefix"
     if: "!contains(github.event.commits[0].message, '[ci-skip]')"
-    
+
     ## Environment variables
     env:
-      FILE_NAME: "v1.0.7_Java-Insiders.zip"
+      FILE_NAME: "v1.0.8_Java-Insiders.zip"
 
     ## Run on Ubuntu
     runs-on: ubuntu-latest
