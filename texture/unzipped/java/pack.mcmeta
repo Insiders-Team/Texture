@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/minecraft-pack-mcmeta.json",
   "pack": {
-    "pack_format": 8,
-    "description": "§r§6§lInsiders\n§r§7Servers texture pack"
+    "pack_format": 9,
+    "description": "§r§6§lInsiders\n§r§7Server texture pack"
   }
 }
