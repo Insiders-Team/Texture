@@ -24,7 +24,7 @@ jobs:
 
     ## Environment variables
     env:
-      FILE_NAME: "v1.0.9_Java-Insiders.zip"
+      FILE_NAME: "v1.1.0_Java-Insiders.zip"
 
     ## Run on Ubuntu
     runs-on: ubuntu-latest
